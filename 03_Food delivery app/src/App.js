@@ -21,9 +21,7 @@ import Body from "./components/Body.js";
 import Footer from "./components/Footer.js";
 
 // config Driven UI
-
 // const config
-
 const AppLayout = () => {
   return (
     <>
