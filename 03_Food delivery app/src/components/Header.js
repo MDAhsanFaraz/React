@@ -1,18 +1,11 @@
 import { useState } from "react";
+import images from "../assets/images.jpeg";
+import { Link } from "react-router-dom";
 
-const loggedInUser = () => {
-  // API call to check authentication
-  return false;
-};
-
+// SPA single page application
+// client side routing server side routing
 const Title = () => (
-  <a href="/">
-    <img
-      className="logo"
-      alt="logo"
-      src="https://lh3.googleusercontent.com/p/AF1QipMKTUs5jo3Hoihm-GazeAIg7Pn5Gmr07GQD5o6W=w768-h432-p-no-v0"
-    />
-  </a>
+  <a href="/">{<img className="logo" alt="logo" src={images} />}</a>
 );
 const Header = () => {
   const [isLoggenIn, setIsLoggedIn] = useState(false);
@@ -23,9 +16,17 @@ const Header = () => {
 
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
           <li>Cart</li>
         </ul>
       </div>
