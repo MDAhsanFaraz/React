@@ -42,11 +42,14 @@ const RestaurantMenu = () => {
         info: res_data.data.cards[0].card.card.info,
         menu: menu.filter((value) => value !== undefined),
       };
+      console.log(modifiedData);
       const nameOfmenuItem = modifiedData.menu.map((item) => {
         return item.itemCards.map((object) => {
+          console.log(object.card.info.name);
           return object.card.info.name;
         });
       });
+      console.log("jk");
       setMenuItem(nameOfmenuItem);
       setRestaurants(modifiedData);
     } catch (error) {
