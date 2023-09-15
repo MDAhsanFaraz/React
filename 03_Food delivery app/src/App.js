@@ -14,7 +14,7 @@
  *  -links
  *  -Copyright
  */
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header.js";
 import Body from "./components/Body.js";
@@ -25,6 +25,15 @@ import Error from "./components/Error.js";
 import Contact from "./components/Contact.js";
 import RestaurantMenu from "./components/RestaurantMenu.js";
 import Profile from "./components/Profile.js";
+import Shimmer from "./components/Shimmer.js";
+
+// Chunking
+// Code Spliting
+// Dynamic Bundling
+// Dynamic import
+// Lazy Loading
+// On Demand Loading
+const Instamart = lazy(() => import("./components/Instamart.js"));
 
 const AppLayout = () => {
   return (
@@ -63,6 +72,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:resId",
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/instamart",
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Instamart />
+          </Suspense>
+        ),
       },
     ],
   },
