@@ -1,20 +1,19 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import images from "../assets/images.jpeg";
 import { Link } from "react-router-dom";
 import useOnline from "../../utils/useOnline";
+import UserContext from "../../utils/UserContext";
 
-// SPA single page application
-// client side routing server side routing
 const Title = () => (
   <a href="/">{<img className="h-28 pl-2" alt="logo" src={images} />}</a>
 );
 const Header = () => {
   const [isLoggenIn, setIsLoggedIn] = useState(false);
   const isOnline = useOnline();
+  const { user } = useContext(UserContext);
   return (
     <div className="flex justify-between  bg-pink-100 shadow-xl">
       {<Title />}
-
       <div className="nav-items">
         <ul className="flex py-12 px-2">
           <li className="px-2">
@@ -35,6 +34,7 @@ const Header = () => {
         </ul>
       </div>
       <h1>{isOnline ? "🟢" : "🔴"}</h1>
+      <h1 className="p-10 font-bold text-red-500 ">{user.name}</h1>
       {isLoggenIn ? (
         <button onClick={() => setIsLoggedIn(false)}>Logout</button>
       ) : (

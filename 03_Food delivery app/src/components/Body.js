@@ -1,14 +1,16 @@
 import RestaurantCard from "./RestaurantCard.js";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer.js";
 import { Link } from "react-router-dom";
 import { filterData } from "../../utils/helper.js";
 import useOnline from "../../utils/useOnline.js";
+import UserContext from "../../utils/UserContext.js";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const { user, setUser } = useContext(UserContext);
   useEffect(() => {
     getRestaurants();
   }, []);
@@ -57,8 +59,28 @@ const Body = () => {
         >
           Search
         </button>
+        <input
+          className="m-2"
+          placeholder="name"
+          value={user.name}
+          onChange={(e) =>
+            setUser({
+              ...user,
+              name: e.target.value,
+            })
+          }
+        ></input>
+        <input
+          placeholder="email"
+          value={user.email}
+          onChange={(e) =>
+            setUser({
+              ...user,
+              email: e.target.value,
+            })
+          }
+        ></input>
       </div>
-
       <div className="flex flex-wrap bg-pink-100">
         {filteredRestaurants.map((restaurant) => {
           return (

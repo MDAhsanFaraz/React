@@ -14,7 +14,7 @@
  *  -links
  *  -Copyright
  */
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header.js";
 import Body from "./components/Body.js";
@@ -26,22 +26,21 @@ import Contact from "./components/Contact.js";
 import RestaurantMenu from "./components/RestaurantMenu.js";
 import Profile from "./components/Profile.js";
 import Shimmer from "./components/Shimmer.js";
+import UserContext from "../utils/UserContext.js";
 
-// Chunking
-// Code Spliting
-// Dynamic Bundling
-// Dynamic import
-// Lazy Loading
-// On Demand Loading
 const Instamart = lazy(() => import("./components/Instamart.js"));
 
 const AppLayout = () => {
+  const [user, setUser] = useState({
+    name: "Md Ahsan Faraz",
+    email: "support@gmail.com",
+  });
   return (
-    <>
+    <UserContext.Provider value={{ user: user, setUser: setUser }}>
       <Header />
       <Outlet />
       <Footer />
-    </>
+    </UserContext.Provider>
   );
 };
 
