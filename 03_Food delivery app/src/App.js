@@ -27,6 +27,9 @@ import RestaurantMenu from "./components/RestaurantMenu.js";
 import Profile from "./components/Profile.js";
 import Shimmer from "./components/Shimmer.js";
 import UserContext from "../utils/UserContext.js";
+import { Provider } from "react-redux";
+import store from "../utils/store.js";
+import Cart from "./components/cart.js";
 
 const Instamart = lazy(() => import("./components/Instamart.js"));
 
@@ -36,11 +39,13 @@ const AppLayout = () => {
     email: "support@gmail.com",
   });
   return (
-    <UserContext.Provider value={{ user: user, setUser: setUser }}>
-      <Header />
-      <Outlet />
-      <Footer />
-    </UserContext.Provider>
+    <Provider store={store}>
+      <UserContext.Provider value={{ user: user, setUser: setUser }}>
+        <Header />
+        <Outlet />
+        <Footer />
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -79,6 +84,10 @@ const appRouter = createBrowserRouter([
             <Instamart />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },
